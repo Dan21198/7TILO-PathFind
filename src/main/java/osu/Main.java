@@ -36,9 +36,18 @@ public class Main {
                 for (int j = 0; j < connectionsJson.length(); j++) {
                     JSONObject connectionJson = connectionsJson.getJSONObject(j);
                     String destinationCode = connectionJson.getString("code");
-                    double distance = connectionJson.getJSONObject("distance").getDouble("value");
 
-                    airport.addConnection(destinationCode, distance);
+                    JSONObject distanceJson = connectionJson.getJSONObject("distance");
+                    double distanceValue = distanceJson.getDouble("value");
+                    String distanceUnit = distanceJson.getString("unit");
+
+                    // Convert miles to kilometers
+                    if (distanceUnit.equalsIgnoreCase("mi")) {
+                        distanceValue *= 1.60934;
+                        distanceUnit = "km";
+                    }
+
+                    airport.addConnection(destinationCode, distanceValue);
                 }
 
                 airports.add(airport);
@@ -47,6 +56,9 @@ public class Main {
             DijkstraAlgorithm dijkstra = new DijkstraAlgorithm(airports);
             dijkstra.findShortestPath("PRG", "DEL");
             dijkstra.findShortestPath("BRE", "FNJ");
+            dijkstra.findShortestPath("JFK", "CAI");
+            dijkstra.findShortestPath("DUB", "DME");
+            dijkstra.findShortestPath("OKA", "EVX");
 
         } catch (IOException e) {
             System.err.println("Error reading the file: " + e.getMessage());
