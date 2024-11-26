@@ -34,7 +34,7 @@ class DijkstraAlgorithm {
             String currentAirportCode = currentNode.airportCode;
 
             // Debugging: Check the current airport code
-            System.out.println("Processing airport: " + currentAirportCode);
+            //System.out.println("Processing airport: " + currentAirportCode);
 
             // Check if the current airport exists in the map
             Airport currentAirport = airports.get(currentAirportCode);
@@ -52,7 +52,7 @@ class DijkstraAlgorithm {
             for (Connection conn : currentAirport.connections) {
                 // Access the distance using the getDistance() method
                 double distance = conn.getDistance();
-                System.out.println("Distance to " + conn.getDestination() + ": " + distance + " km");
+                //System.out.println("Distance to " + conn.getDestination() + ": " + distance + " km");
 
                 // Now you can use the distance for your Dijkstra algorithm
                 double newDist = distances.get(currentAirportCode) + distance;
