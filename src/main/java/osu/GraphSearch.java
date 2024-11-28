@@ -128,9 +128,11 @@ class GraphSearch {
             String nextCode = entry.getKey();
             double distance = entry.getValue();
 
-            if (airports.get(nextCode).connections.containsKey(toCode)) {
-                minDistance = Math.min(minDistance, distance);
-            }
+            double connectionsCount = airports.get(nextCode).connections.size();
+
+            double adjustedDistance = distance / (connectionsCount + 1);  // Dělíme o počet připojení, čímž upřednostníme více propojená letiště
+
+            minDistance = Math.min(minDistance, adjustedDistance);
         }
 
         return minDistance == Double.MAX_VALUE ? 0 : minDistance;
