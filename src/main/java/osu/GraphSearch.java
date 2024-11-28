@@ -118,10 +118,22 @@ class GraphSearch {
             throw new IllegalArgumentException("One or both of the airports are invalid: " + fromCode + ", " + toCode);
         }
 
-        double fromConnections = fromAirport.connections.size();
-        double toConnections = toAirport.connections.size();
+        if (fromAirport.connections.containsKey(toCode)) {
+            return fromAirport.connections.get(toCode);
+        }
 
-        return Math.abs(fromConnections - toConnections);
+        double minDistance = Double.MAX_VALUE;
+
+        for (Map.Entry<String, Double> entry : fromAirport.connections.entrySet()) {
+            String nextCode = entry.getKey();
+            double distance = entry.getValue();
+
+            if (airports.get(nextCode).connections.containsKey(toCode)) {
+                minDistance = Math.min(minDistance, distance);
+            }
+        }
+
+        return minDistance == Double.MAX_VALUE ? 0 : minDistance;
     }
 
     private void printShortestPath(Map<String, String> previousAirports, String startCode, String endCode) {
