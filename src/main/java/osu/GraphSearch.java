@@ -12,7 +12,6 @@ class GraphSearch {
         }
     }
 
-    // Dijkstra's Algorithm
     public void findShortestPathDijkstra(String startCode, String endCode) {
         PriorityQueue<Node> queue = new PriorityQueue<>(Comparator.comparingDouble(n -> n.distance));
         Map<String, Double> distances = new HashMap<>();
