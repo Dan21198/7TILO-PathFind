@@ -130,8 +130,7 @@ class GraphSearch {
 
             double connectionsCount = airports.get(nextCode).connections.size();
 
-            double adjustedDistance = distance / (connectionsCount + 1);  // Dělíme o počet připojení, čímž upřednostníme více propojená letiště
-
+            double adjustedDistance = distance / (connectionsCount + 1);
             minDistance = Math.min(minDistance, adjustedDistance);
         }
 
