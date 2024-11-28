@@ -1,21 +1,17 @@
 package osu;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Airport {
     String code;
     String name;
-    List<Connection> connections;
+    Map<String, Double> connections;
 
-    public Airport(String code, String name) {
-        this.code = code;
+    public Airport(String name, String code) {
         this.name = name;
-        this.connections = new ArrayList<>();
-    }
-
-    public void addConnection(String destination, double distance) {
-        this.connections.add(new Connection(destination, distance));
+        this.code = code;
+        this.connections = new HashMap<>();
     }
 }
 
